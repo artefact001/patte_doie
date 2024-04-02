@@ -12,6 +12,7 @@ class membre {
         $this->prenom=$prenom;
         $this->nom=$nom;
         $this->age=$age;
+        $this->sexe=$sexe;
         $this->situation=$situation;
         $this->statut=$statut;
     }
@@ -66,41 +67,30 @@ public function setstatut($new_statut){
 
 
 // methode pour ajouter des membres
+
+
 public function add($prenom,$nom,$age,$sexe,$situation,$statut){
-    try{
-    $sql = "INSERT INTO membre ($prenom,$nom,$age,$sexe,$situation,$statut) VALUES (:prenom, :nom, :age,:sexe, :situation, :statut)";
-    $stmt = $this->connexion->prepare($sql);
-    $stmt->bindParam(' :prenom' , $prenom, PDO::PARAM_STR);
-    $stmt->bindParam(' :nom' , $nom, PDO::PARAM_STR);
-    $stmt->bindParam(' :age' , $age, PDO::PARAM_STR);
-    $stmt->bindParam(' :sexe' , $sexe, PDO::PARAM_STR);
-    $stmt->bindParam(' :situation' , $situation, PDO::PARAM_STR);
-    $stmt->bindParam(' :statut' , $statut, PDO::PARAM_STR);
-    $resultats = $stmt->execute();
-    if ($resultats) {
-        header("location: index.php");
-        exit();
-    } else {
-        die("Erreur : Impossible d'insérer des données.");
+    try {
+        $sql = "INSERT INTO membre (prenom, nom, age, sexe, situation, statut) VALUES (:prenom, :nom, :age, :sexe, :situation, :statut)";
+        $stmt = $this->connexion->prepare($sql);
+        $stmt->bindParam(':prenom', $prenom, PDO::PARAM_STR);
+        $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
+        $stmt->bindParam(':age', $age, PDO::PARAM_STR);
+        $stmt->bindParam(':sexe', $sexe, PDO::PARAM_STR);
+        $stmt->bindParam(':situation', $situation, PDO::PARAM_STR);
+        $stmt->bindParam(':statut', $statut, PDO::PARAM_STR);
+        $resultats = $stmt->execute();
+        if ($resultats) {
+            header("location: idex.php");
+            exit();
+        } else {
+            die("Erreur : Impossible d'insérer des données.");
+        }
+    } catch (PDOException $e) {
+        die("Erreur : Impossible d'insérer des données " . $e->getMessage());
     }
-
-
-}catch (PDOException $e) {
-    die("Erreur : Impossible d'insérer des données " . $e->getMessage());
 }
-
-
 }
-
-
-
-
-
-
-
-
-}
-
 
 
 ?>

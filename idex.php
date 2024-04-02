@@ -11,6 +11,7 @@ if(isset($_POST['soumetre'])){
     $statut=$_POST['statut']; 
 
     if($prenom!="" && $nom!="" && $age!="" && $sexe!="" && $situation!="" &&  $statut!=""){
+        $membre=new membre ($connexion,"ndeye","cisse",12,"feminin", "mariee", "mariee");
         $membre->add($prenom,$nom,$age,$sexe, $situation, $statut);
 
 
@@ -66,7 +67,7 @@ if(isset($_POST['soumetre'])){
 
       <div class="remplir_formulaire">
           <label for="statut">quelle est le statut du membre?</label>
-          <select name="" id="">
+          <select name="statut" id="statut">
             <option value="Chef de quartier">Chef de quartier</option>
             <option value=" civile"> civile</option>
             <option value="badian gokh">badian gokh</option>
