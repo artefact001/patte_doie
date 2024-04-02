@@ -139,6 +139,26 @@ public function update($id, $prenom, $nom, $age, $sexe, $situation, $statut){
     }
 }
 
+public function delete($id) {
+    try {
+        // Requête SQL pour supprimer le membre avec l'ID donné
+        $sql = "DELETE FROM membre WHERE id = :id";
+        // Préparation de la requête
+        $stmt = $this->connexion->prepare($sql);
+        // Liaison de la valeur du paramètre ID
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        // Exécution de la requête
+        $stmt->execute();
+        // Redirection vers la page index après la suppression
+        header("location: liste.php");
+        exit(); // Arrêt du script après la redirection
+    } catch(PDOException $e) {
+        // Gestion de l'erreur en cas d'échec de la suppression
+        die("Erreur : Impossible de supprimer le membre : " . $e->getMessage());
+    }
+}
+
+
 }
 
 
