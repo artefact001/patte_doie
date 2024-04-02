@@ -90,7 +90,36 @@ public function add($prenom,$nom,$age,$sexe,$situation,$statut){
         die("Erreur : Impossible d'insérer des données " . $e->getMessage());
     }
 }
+
+
+// methode pour lire les membres
+public function read(){
+
+    try{
+        $sql="SELECT * FROM membre";
+    // preaparation de la requete
+    $stmt=$this->connexion->prepare($sql);
+    // execution de la requete
+    $stmt->execute();
+    // recuperation des elements dans un tableau
+    $resultats=$stmt->fetchAll(PDO::FETCH_ASSOC);
+    return $resultats;
+
+
+    }
+    
+    catch(PDOException $e){
+        die("erreur:impossible d'afficher les elements" .$e->getMessage());
+
+
+
+    }
 }
+
+
+}
+
+
 
 
 ?>

@@ -12,6 +12,9 @@ try {
     $connexion = new PDO("mysql:host=" . DB_SERVER . ";dbname=" . DB_NAME, USER_NAME, DB_PASSWORD);
     // Configuration de PDO pour afficher les erreurs SQL
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $membre=new membre ($connexion,"ndeye","cisse",12,"feminin", "mariee", "mariee");
+    // appel de la methode read
+    $resultats=$membre->read();
    
 
     

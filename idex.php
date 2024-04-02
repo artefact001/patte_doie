@@ -32,7 +32,7 @@ if(isset($_POST['soumetre'])){
 <header>
     <nav>
         <a href="idex.php">ADD MEMBRE</a>
-        <a href="list_membre.php">LIST_MEMBRE</a> 
+        <a href="liste.php">LIST_MEMBRE</a> 
     </nav>
   </header> 
 
