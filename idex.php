@@ -13,8 +13,6 @@ if(isset($_POST['soumetre'])){
     if($prenom!="" && $nom!="" && $age!="" && $sexe!="" && $situation!="" &&  $statut!=""){
         $membre=new membre ($connexion,"ndeye","cisse",12,"feminin", "mariee", "mariee");
         $membre->add($prenom,$nom,$age,$sexe, $situation, $statut);
-
-
     }
  }
 
@@ -52,7 +50,7 @@ if(isset($_POST['soumetre'])){
       </div>
       
       <div class="remplir_formulaire">
-          <label for="age">Quelle est l'age du memebre?</label>
+          <label for="age">Quelle est l'age du membre?</label>
           <input type="number" name="age">
       </div>
       <div class="remplir_formulaire">

@@ -13,8 +13,7 @@ try {
     // Configuration de PDO pour afficher les erreurs SQL
     $connexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $membre=new membre ($connexion,"ndeye","cisse",12,"feminin", "mariee", "mariee");
-    // appel de la methode read
-    $resultats=$membre->read();
+   
    
 
     
