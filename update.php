@@ -56,3 +56,4 @@ class SituationProfessionnelle {
         $this->connexion = $connexion;
         $this->contenu = $contenu;
     }
+     }
