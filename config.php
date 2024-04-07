@@ -4,7 +4,7 @@ include_once "membre.php";
 // création des constantes pour les informations de la base de données
 define("DB_SERVER", "localhost");
 define("USER_NAME", "root");
-define("DB_PASSWORD", "Mbombe@78400$");
+define("DB_PASSWORD", "");
 define("DB_NAME", "habitant");
 
 // connexion avec la base de données
