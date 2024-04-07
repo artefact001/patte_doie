@@ -5,18 +5,17 @@ require_once "config.php";
 if(isset($_POST['soumettre'])){
     $prenom = $_POST['prenom'];
     $nom = $_POST['nom'];
-    $age = $_POST['age'];
-    $sexe = $_POST['sexe'];
-    $situation_matrimoniale = $_POST['situation_matrimoniale'];
-    $statut = $_POST['statut']; 
-    $quartier_id = $_POST['quartier'];
     $tranche_age_id = $_POST['tranche_age'];
+    $sexe = $_POST['sexe'];
+    $situation = $_POST['situation'];
+    $statut = $_POST['statut']; 
+    $situation_id = $_POST['situation_id'];
 
     // Récupérer l'ID à partir de la requête GET
     $id = $_GET['id'];
 
     // Appeler la méthode update avec les nouvelles valeurs
-    $membre->update($id, $prenom, $nom, $age, $sexe, $situation_matrimoniale, $statut, $quartier_id, $tranche_age_id);
+    $membre->update($id, $prenom, $nom,$tranche_age_id, $sexe, $situation, $statut,$situation_id);
     
     // Rediriger vers la page index
     header("location: index.php");
@@ -32,12 +31,13 @@ if(isset($id)) {
         $membreData = $membre->readOne($id);
         $prenom = $membreData['prenom'];
         $nom = $membreData['nom'];
-        $age = $membreData['age'];
-        $sexe = $membreData['sexe'];
-        $situation_matrimoniale = $membreData['situation_matrimoniale'];
-        $statut = $membreData['statut'];
-        $quartier_id = $membreData['quartier_id'];
         $tranche_age_id = $membreData['tranche_age_id'];
+        $sexe = $membreData['sexe'];
+        $situation = $membreData['situation'];
+        $statut = $membreData['statut'];
+        $situation_id = $membreData['situation_id'];
+
+ 
     } catch(PDOException $e) {
         die("Erreur : " . $e->getMessage());
     }
@@ -100,10 +100,10 @@ if(isset($id)) {
                 <option value="Badian Gokh" <?php if($statut == "Badian Gokh") echo "selected"; ?>>Badian Gokh</option>
             </select>
         </div>
-        <div class="remplir_formulaire">
+         <div class="remplir_formulaire">
             <label for="quartier">Quartier :</label>
             <select name="quartier" id="quartier">
-                <?php
+            <?php
                 $quartiers = $quartier->read();
                 foreach ($quartiers as $row) {
                     echo "<option value='" . $row['id'] . "'";

@@ -7,19 +7,21 @@ if(isset($_POST['soumetre'])){
     $nom=$_POST['nom'];
     $tranche_age_id=$_POST['tranche_age'];
     $sexe=$_POST['sexe'];
-    $situation_matrimoniale=$_POST['situation_matrimoniale'];
+    $situation=$_POST['situation'];
     $statut=$_POST['statut']; 
-    $quartier_id=$_POST['quartier'];
+    $situation_matrimoniale=$_POST['situation_id'];
 
-    if($prenom!="" && $nom!="" && $tranche_age_id!="" && $sexe!="" && $situation_matrimoniale!="" && $statut!="" && $quartier_id!=""){
-        $membre=new membre ($connexion, "John", "Doe", $tranche_age_id, "Masculin", "Célibataire", "Chef de quartier",$quartier_id);
+    $situation_id=$_POST['situation_id'];
 
-        $membre->add($prenom,$nom,$tranche_age_id,$sexe, $situation_matrimoniale, $statut, $quartier_id);
+    if($prenom!="" && $nom!="" && $tranche_age_id!="" && $sexe!="" && $situation!="" && $statut!="" && $situation_id!=""){
+        $membre=new membre ($connexion, "John", "Doe", $tranche_age_id, "Masculin", "Célibataire", "Chef de quartier",$situation_id);
+
+        $membre->add($prenom,$nom,$tranche_age_id,$sexe, $situation, $statut, $situation_id);
     }
 }
 
-// Récupération de la liste des quartiers
-$quartiers = $quartier->read();
+// Récupération de la liste des situations professionnel
+$situation_id = $situation_id->read();
 
 // Récupération de la liste des tranches d'âge
 $tranches_age = $tranche_age->read();
@@ -57,7 +59,13 @@ $tranches_age = $tranche_age->read();
             <label for="tranche_age">Tranche d'âge :</label>
             <select name="tranche_age" id="tranche_age">
                 <?php foreach ($tranches_age as $tranche_age) : ?>
-                    <option value="<?php echo $tranche_age['id']; ?>"><?php echo $tranche_age['contenu']; ?></option>
+                    <option value="<?php echo $tranche_age['id']; ?>">
+                <option value="0-18">0-18</option>
+                <option value="18-30">18-30</option>
+                <option value="30-50">30-50</option>
+                <option value="+50">+50</option>
+                    
+                    <?php echo $tranche_age['contenu']; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -86,11 +94,14 @@ $tranches_age = $tranche_age->read();
             </select>
         </div>
         <div class="remplir_formulaire">
-            <label for="quartier">Quartier :</label>
-            <select name="quartier" id="quartier">
-                <?php foreach ($quartiers as $quartier) : ?>
-                    <option value="<?php echo $quartier['id']; ?>"><?php echo $quartier['nom']; ?></option>
-                <?php endforeach; ?>
+            <label for="situation_professionnel">situation_professionnel :</label>
+            <select name="situation_id" id="situation_id">
+                 <?php foreach ($situation_id as $situation_id) : ?>
+                <option value="chomeur">chomeur</option>
+                <option value="travailleur">travailleur</option>
+                <option value="retraite">retraite</option>
+                    <option value="<?php echo $situation_id['id']; ?>"><?php echo $situation_id['nom']; ?></option>
+                <?php endforeach; ?> 
             </select>
         </div>
         <input type="submit" value="Soumettre" name="soumetre" id="bouton">

@@ -5,36 +5,37 @@ class Membre {
     private $nom;
     private $tranche_age_id;
     private $sexe;
-    private $situation_matrimoniale; // Nouvelle propriété pour la situation matrimoniale
+    private $situation;
     private $statut;
-    private $situation_id;
-    private $quartier_id;
+    private $situation_id; // Nouvelle propriété pour la situation professionnel
 
-    public function __construct($connexion, $prenom, $nom, $sexe,$situation_matrimoniale,$statut,$situation_id,$tranche_age_id,$quartier_id, ){
+
+
+    public function __construct($connexion, $prenom, $nom,$tranche_age_id, $sexe,$situation,$statut,$situation_id){
         $this->connexion = $connexion;
         $this->prenom = $prenom;
         $this->nom = $nom;
         $this->tranche_age_id = $tranche_age_id;
         $this->sexe = $sexe;
-        $this->situation_matrimoniale = $situation_matrimoniale; // Initialisation de la situation matrimoniale
+        $this->situation = $situation;
         $this->statut = $statut;
-        $this->situation_id = $situation_id;
-        $this->quartier_id = $quartier_id;
+        $this->situation_id = $situation_id; // Initialisation de la situation professionnel
+
     }
 
     // Getters et setters pour la nouvelle propriété
 
-    public function getSituationMatrimoniale() {
-        return $this->situation_matrimoniale;
+    public function getSituation_id() {
+        return $this->situation_id;
     }
 
-    public function setSituationMatrimoniale($situation_matrimoniale) {
-        $this->situation_matrimoniale = $situation_matrimoniale;
+    public function setSituationid($situation_id) {
+        $this->situation_id = $situation_id;
     }
 
     // Méthodes CRUD mises à jour
 
-    public function add($prenom, $nom, $sexe, $situation_id, $statut, $tranche_age_id, $quartier_id, $situation_matrimoniale){
+    public function add($prenom, $nom,$tranche_age_id, $sexe, $situation, $statut, $situation_id){
         try {
             $sql = "INSERT INTO membre (prenom, nom, sexe, situation_id, statut, tranche_age_id, quartier_id, situation_matrimoniale) VALUES (:prenom, :nom, :age, :sexe, :situation_id, :statut, :tranche_age_id, :quartier_id, :situation_matrimoniale)";
             $stmt = $this->connexion->prepare($sql);
@@ -42,10 +43,9 @@ class Membre {
             $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
             $stmt->bindParam(':tranche_age_id', $tranche_age_id, PDO::PARAM_INT);
             $stmt->bindParam(':sexe', $sexe, PDO::PARAM_STR);
-            $stmt->bindParam(':situation_matrimoniale', $situation_matrimoniale, PDO::PARAM_STR); // Liaison pour la situation matrimoniale
+            $stmt->bindParam(':situation', $situation, PDO::PARAM_STR); 
             $stmt->bindParam(':statut', $statut, PDO::PARAM_STR);
-            $stmt->bindParam(':situation_id', $situation_id, PDO::PARAM_INT);
-            $stmt->bindParam(':quartier_id', $quartier_id, PDO::PARAM_INT);
+            $stmt->bindParam(':situation_id', $situation_id , PDO::PARAM_INT);
             $resultats = $stmt->execute();
             if ($resultats) {
                 header("location: liste.php");
@@ -74,7 +74,7 @@ class Membre {
         }
     }
 
-    public function update($id, $prenom, $nom, $sexe, $situation_id, $statut, $tranche_age_id, $quartier_id, $situation_matrimoniale){
+    public function update($id, $prenom, $nom, $tranche_age_id, $sexe, $situation, $statut, $situation_id){
         try{
             $sql = "UPDATE membre SET prenom = :prenom, nom = :nom, age = :age, sexe = :sexe, situation_id = :situation_id, statut = :statut, tranche_age_id = :tranche_age_id, quartier_id = :quartier_id, situation_matrimoniale = :situation_matrimoniale WHERE id = :id";
             $stmt = $this->connexion->prepare($sql);
@@ -83,10 +83,9 @@ class Membre {
             $stmt->bindParam(':nom', $nom, PDO::PARAM_STR);
             $stmt->bindParam(':tranche_age_id', $tranche_age_id, PDO::PARAM_INT);
             $stmt->bindParam(':sexe', $sexe, PDO::PARAM_STR);
-            $stmt->bindParam(':situation_id', $situation_id, PDO::PARAM_INT);
+            $stmt->bindParam(':situation_id', $situation, PDO::PARAM_INT);
             $stmt->bindParam(':statut', $statut, PDO::PARAM_STR);
-            $stmt->bindParam(':quartier_id', $quartier_id, PDO::PARAM_INT);
-            $stmt->bindParam(':situation_matrimoniale', $situation_matrimoniale, PDO::PARAM_STR); // Liaison pour la situation matrimoniale
+            $stmt->bindParam(':situation_matrimoniale', $situation_id, PDO::PARAM_STR); // Liaison pour la situation matrimoniale
             $stmt->execute();
             header("location: liste.php");
             exit();
