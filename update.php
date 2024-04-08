@@ -28,7 +28,7 @@ $id = $_GET['id'];
 if(isset($id)) {
     try {
         // Requête SQL pour sélectionner les données du membre à mettre à jour
-        $membreData = $membre->readOne($id);
+        $membreData = $membre ['readOne($id)'];
         $prenom = $membreData['prenom'];
         $nom = $membreData['nom'];
         $tranche_age_id = $membreData['tranche_age_id'];
@@ -75,8 +75,18 @@ if(isset($id)) {
             <input type="text" name="nom" value="<?php echo $nom ?>">
         </div>
         <div class="remplir_formulaire">
-            <label for="age">Âge :</label>
-            <input type="number" name="age" value="<?php echo $age ?>">
+            <label for="tranche_age">Tranche d'âge :</label>
+            <select name="tranche_age" id="tranche_age">
+                <?php foreach ($tranches_age as $tranche_age) : ?>
+                    <option value="<?php echo $tranche_age['id']; ?>">
+                <option value="0-18">0-18</option>
+                <option value="18-30">18-30</option>
+                <option value="30-50">30-50</option>
+                <option value="+50">+50</option>
+                    
+                    <?php echo $tranche_age['contenu']; ?></option>
+                <?php endforeach; ?>
+            </select>
         </div>
         <div class="remplir_formulaire">
             <label for="sexe">Sexe :</label>

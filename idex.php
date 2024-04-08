@@ -9,19 +9,19 @@ if(isset($_POST['soumetre'])){
     $sexe=$_POST['sexe'];
     $situation=$_POST['situation'];
     $statut=$_POST['statut']; 
-    $situation_matrimoniale=$_POST['situation_id'];
+    $id=$_POST['id'];
 
     $situation_id=$_POST['situation_id'];
 
-    if($prenom!="" && $nom!="" && $tranche_age_id!="" && $sexe!="" && $situation!="" && $statut!="" && $situation_id!=""){
-        $membre=new membre ($connexion, "John", "Doe", $tranche_age_id, "Masculin", "Célibataire", "Chef de quartier",$situation_id);
+    if($prenom!="" && $nom!="" && $tranche_age_id!="" && $sexe!="" && $situation!="" && $statut!="" && $id!=""){
+        $membre=new membre ($connexion, "John", "Doe", $tranche_age_id, "Masculin", "Célibataire", "Chef de quartier",$id);
 
-        $membre->add($prenom,$nom,$tranche_age_id,$sexe, $situation, $statut, $situation_id);
+        $membre->add($prenom,$nom,$tranche_age_id,$sexe, $situation, $statut, $id);
     }
 }
 
 // Récupération de la liste des situations professionnel
-$situation_id = $situation_id->read();
+$id = $id->read();
 
 // Récupération de la liste des tranches d'âge
 $tranches_age = $tranche_age->read();
@@ -96,11 +96,11 @@ $tranches_age = $tranche_age->read();
         <div class="remplir_formulaire">
             <label for="situation_professionnel">situation_professionnel :</label>
             <select name="situation_id" id="situation_id">
-                 <?php foreach ($situation_id as $situation_id) : ?>
+                 <?php foreach ($id as $id) : ?>
                 <option value="chomeur">chomeur</option>
                 <option value="travailleur">travailleur</option>
                 <option value="retraite">retraite</option>
-                    <option value="<?php echo $situation_id['id']; ?>"><?php echo $situation_id['nom']; ?></option>
+                    <option value="<?php echo $id['id']; ?>"><?php echo $id['nom']; ?></option>
                 <?php endforeach; ?> 
             </select>
         </div>

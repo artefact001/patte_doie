@@ -49,7 +49,7 @@ $resultats = $membre->read();
                 <td><?php echo $membre['tranche_age']; ?></td>
                 <td><?php echo $membre['sexe']; ?></td>
                 <td><?php echo $membre['situation']; ?></td>
-                <td><?php echo $membre['situation_id']; ?></td>
+                <td><?php echo $membre['situation professionnelle']; ?></td>
                 <!-- Bouton pour éditer les données avec un lien vers updatedata.php -->
                 <td><a href="update.php?id=<?php echo $membre['id']; ?>">Edit</a></td>
                 <!-- Bouton pour supprimer les données avec un lien vers deletedata.php -->
